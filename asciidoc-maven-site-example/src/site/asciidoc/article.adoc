@@ -16,6 +16,33 @@ Then icon:twitter[role=aqua] about it!
 
 toc::[]
 
+== Table
+
+[cols="<,^,>"]
+.Ruby platforms
+|===
+|Name |Language |Repo URL
+
+|MRI |C |https://github.com/ruby/ruby
+|JRuby |Java |https://github.com/jruby/jruby
+|Opal |JavaScript |https://github.com/opal/opal
+|Rubinius |Ruby |https://github.com/rubinius/rubinius
+
+|===
+
+== Title Table
+
+|===
+|Name |Language
+
+|===
+
+== Empty Table
+
+|===
+
+|===
+
 == Sample Section
 
 [square]
@@ -23,17 +50,38 @@ toc::[]
 * item 2
 
 [source,ruby]
+.Ruby example
 ----
 puts "Hello, World!"
 ----
 
-[caption=]
-.Ruby platforms
-|===
-|Name |Language
+[source,java]
+.Java exmaple
+----
+package example;
 
-|MRI |C
-|JRuby |Java
-|Opal |JavaScript
-|Rubinius |Ruby
-|===
+public class StringUtils {
+    // tag::contains[]
+    public boolean contains(String haystack, String needle) {
+        return haystack.contains(needle);
+    }
+    // end::contains[]
+}
+----
+
+[source,xml]
+.XML example
+----
+<asciidoc>
+    <!-- optional site-wide AsciiDoc attributes -->
+    <attributes>
+        <icons>font</icons>
+        <source-highlighter>coderay</source-highlighter>
+        <coderay-css>style</coderay-css>
+        <toclevels>2</toclevels>
+    </attributes>
+    <templateDirs>
+        <dir>src/site/slim</dir>
+    </templateDirs>
+</asciidoc>
+----

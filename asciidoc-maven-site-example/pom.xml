@@ -38,6 +38,9 @@
                             <coderay-css>style</coderay-css>
                             <toclevels>2</toclevels>
                         </attributes>
+                        <templateDirs>
+                            <dir>src/site/slim-templates</dir>
+                        </templateDirs>
                     </asciidoc>
                 </configuration>
                 <dependencies>

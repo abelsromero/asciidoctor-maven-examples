@@ -1,0 +1,34 @@
+table(id=id
+      class=['table table-striped', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", role]
+      style=[("width:#{attr :tablepcwidth}%" unless option? 'autowidth'),("float:#{attr :float}" if attr? :float)].compact.join('; '))
+  - if title?
+    caption.title =captioned_title
+  - unless (attr :rowcount).zero?
+    colgroup
+      - if option? 'autowidth'
+        - columns.each do
+          col
+      - else
+        - columns.each do |col|
+          col style="width: #{col.attr :colpcwidth}%;"
+      - [:head, :foot, :body].reject { |tblsec| rows[tblsec].empty? }.each do |tblsec|
+        - rows[tblsec].each_with_index do |row,row_index|
+          tr class=["#{tblsec == :head ? 'a': row_index%2==0 ? 'b': 'a'}"]
+            - row.each do |cell|
+              *{tag: (tblsec == :head || cell.style == :header ? 'th' : 'td'),
+                  class: [ "halign-#{cell.attr :halign}", "valign-#{cell.attr :valign}"],
+                  colspan: cell.colspan,
+                  rowspan: cell.rowspan}
+                - if tblsec == :head
+                  =cell.text
+                - else
+                  - case cell.style
+                  - when :asciidoc
+                    div =cell.content
+                  - when :verse
+                    .verse =cell.text
+                  - when :literal
+                    .literal: pre =cell.text
+                  - else
+                    - cell.content.each do |text|
+                      =text
