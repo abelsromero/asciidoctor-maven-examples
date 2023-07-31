@@ -59,8 +59,16 @@ jobs:
         env:
             os_name: ${{ matrix.os }}
             java_version: ${{ matrix.java }}
-            maven_version: ${{ matrix.maven }}
         if: always()
         with:
             name: tests-output-${{ env.os_name }}-${{ env.java_version }}
             path: tests/target/*
+      - name: Upload asciidoctor-pdf-cjk-example
+        uses: actions/upload-artifact@v3
+        env:
+            os_name: ${{ matrix.os }}
+            java_version: ${{ matrix.java }}
+        if: always()
+        with:
+            name: tests-output-asciidoctor-pdf-cjk-example-${{ env.os_name }}-${{ env.java_version }}
+            path: asciidoctor-pdf-cjk-example/target/*
