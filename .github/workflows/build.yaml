@@ -22,7 +22,6 @@ jobs:
           - 11
           - 17
         maven:
-          - 3.8.8
           - 3.9.3
     runs-on: ${{ matrix.os }}
     steps:
@@ -63,5 +62,5 @@ jobs:
             maven_version: ${{ matrix.maven }}
         if: always()
         with:
-            name: tests-output-${{ env.os_name }}-${{ env.java_version }}-mvn${{ env.maven_version }}
+            name: tests-output-${{ env.os_name }}-${{ env.java_version }}
             path: tests/target/*
