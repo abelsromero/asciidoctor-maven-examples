@@ -55,3 +55,13 @@ jobs:
         run: mvn -B clean
       - name: Build
         run: mvn -B test -pl tests
+      - name: Upload test output
+        uses: actions/upload-artifact@v3
+        env:
+            os_name: ${{ matrix.os }}
+            java_version: ${{ matrix.java }}
+            maven_version: ${{ matrix.maven }}
+        if: always()
+        with:
+            name: tests-output-${{ env.os_name }}-${{ env.java_version }}-mvn${{ env.maven_version }}
+            path: tests/target/*
