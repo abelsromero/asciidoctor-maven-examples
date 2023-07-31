@@ -35,10 +35,12 @@ jobs:
             maven-version: ${{ matrix.maven }}
       - name: Cache dependencies
         uses: actions/cache@v3
+        env:
+            java_version: ${{ matrix.java }}
         with:
           path: ~/.m2/repository
-          key: mvn-cache-${{ runner.os }}-${{ matrix.java }}
-          restore-keys: ${{ runner.os }}-mvn-cache-
+          key: mvn-cache-${{ runner.os }}-${{ env.java_version }}
+          restore-keys: mvn-cache-${{ runner.os }}-${{ env.java_version }}
       - name: Install Graphviz (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt install graphviz
