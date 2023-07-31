@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-mvn-cache-${{ hashFiles('**/pom.xml') }}
+          key: mvn-cache-${{ runner.os }}-${{ runner.java }}
           restore-keys: ${{ runner.os }}-mvn-cache-
       - name: Install Graphviz (Linux)
         if: matrix.os == 'ubuntu-latest'
