@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.asciidoctor.maven</groupId>
-    <artifactId>asciidoc-to-html-example</artifactId>
+    <artifactId>asciidoclet</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>AsciiDoclet Example</name>
     <description>An example project that demonstrates using Asciidoclet.
@@ -19,7 +19,7 @@
                 <configuration>
                     <source>11</source>
                     <additionalJOptions>
-                        <!-- additionalJOption>-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</additionalJOption -->
+                        <additionalJOption>-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</additionalJOption>
                         <!-- Not necessary if the below are there
                         <additionalJOption>- -add-exports=jdk.javadoc/jdk.javadoc.internal.tool=asciidoclet</additionalJOption>
                         <additionalJOption>- -add-exports=jdk.compiler/com.sun.tools.javac.parser=asciidoclet</additionalJOption>
@@ -42,11 +42,13 @@
                         </docletArtifact>
                     </docletArtifacts>
                     <overview>src/main/java/overview.adoc</overview>
+                    <header>My header</header>
                     <additionalOptions>  <!--1-->
                         --base-dir ${project.basedir}
                         --attribute "project_name=${project.name}"
                         --attribute "project_version=${project.version}"
-                        --attribute "project_desc=${project.description}"
+                        --attribute "project_description=${project.description}"
+                        --attributes-file "src/main/java/asciidoclet-attributes.adoc"
                     </additionalOptions>
                 </configuration>
                 <dependencies>
