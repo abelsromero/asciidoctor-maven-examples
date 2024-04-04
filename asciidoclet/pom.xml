@@ -17,7 +17,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.3</version>
                 <configuration>
-                    <source>11</source>
+                    <source>17</source>
                     <additionalJOptions>
                         <additionalJOption>-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</additionalJOption>
                         <!-- Not necessary if the below are there
@@ -30,6 +30,11 @@
                         <additionalJOption>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</additionalJOption>
                         <additionalJOption>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</additionalJOption>
                         <additionalJOption>-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</additionalJOption>
+                        <!-- Java 17/21 -->
+                        <additionalJOption>--add-opens=jdk.compiler/com.sun.tools.javac.api=asciidoclet</additionalJOption>
+                        <additionalJOption>-J--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</additionalJOption>
+                        <additionalJOption>--add-opens=jdk.compiler/com.sun.tools.javac.parser=asciidoclet</additionalJOption>
+                        <additionalJOption>-J--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</additionalJOption>
                         <additionalJOption>-Xdoclint:all,-html,-accessibility</additionalJOption>
                     </additionalJOptions>
                     <doclet>org.asciidoctor.asciidoclet.Asciidoclet</doclet>
@@ -50,6 +55,7 @@
                         --attribute "project_description=${project.description}"
                         --attributes-file "src/main/java/asciidoclet-attributes.adoc"
                     </additionalOptions>
+                    <includes></includes>
                 </configuration>
                 <dependencies>
                     <!--
