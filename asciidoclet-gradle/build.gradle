@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenLocal()
+}
+
+configurations {
+    asciidoclet
+}
+
+dependencies {
+    asciidoclet 'org.asciidoctor:asciidoclet:2.0.+'
+}
+
+javadoc {
+    options {
+        docletpath = configurations.asciidoclet.files.asType(List)
+        doclet = 'org.asciidoctor.asciidoclet.Asciidoclet'
+        overview = "src/main/java/overview.adoc"
+        addStringOption "-base-dir", "${projectDir}" // <1>
+        addStringOption  \
+            "-attribute",
+                "name=${project.name}," + // <2>
+                "version=${project.version}," +
+                "title-link=https://example.com[${project.name} ${project.version}]"
+        jFlags  \
+            "--add-exports=jdk.javadoc/jdk.javadoc.internal.tool=ALL-UNNAMED"
+//            "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+//            "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED"
+//            "--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED"
+
+//            "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+//            "--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED"
+    }
+
+// https://github.com/java9-modularity/gradle-modules-plugin/issues/170
+//    moduleOptions {
+//        -J--add-exports=jdk.javadoc/jdk.javadoc.internal.tool=ALL-UNNAMED
+//        -J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+//        -J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+//        -J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED
+//        addExports = [
+//            'jdk.javadoc/jdk.javadoc.internal.tool'    : 'ALL-UNNAMED'
+//        ]
+//    }
+}

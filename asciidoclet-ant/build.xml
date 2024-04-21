@@ -1,0 +1,50 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="MyProject">
+
+    <property name="lib.dir" value="lib"/>
+
+    <!-- Define ivy task -->
+    <target name="init-ivy">
+        <mkdir dir="${user.home}/.ivy2"/>
+        <ivy:settings file="ivysettings.xml" name="resolver"/>
+    </target>
+
+    <!-- Resolve dependencies -->
+    <target name="resolve" depends="init-ivy">
+        <ivy:resolve/>
+        <ivy:report todir="${build.dir}/ivy"/>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src/main/java" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/example.jar" basedir="build/classes"/>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/HelloWorld.jar" fork="true"/>
+    </target>
+
+    <!--
+    <javadoc destdir="target/javadoc"
+             sourcepath="src"
+             overview="src/overview.adoc">
+        <doclet name="{asciidoclet-class}" pathref="asciidoclet.classpath">
+            <param name="- -base-dir" value="${basedir}"/>
+            <param name="- -attribute" value="name=${ant.project.name}"/>
+            <param name="- -attribute" value="version=${version}"/>
+            <param name="- -attribute" value="title-link=https://example.com[${ant.project.name} ${version}]"/>
+        </doclet>
+    </javadoc>
+
+    -->
+
+</project>

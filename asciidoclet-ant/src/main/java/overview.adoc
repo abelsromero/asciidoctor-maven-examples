@@ -1,0 +1,7 @@
+= Asciidoclet Example
+
+{project_name} - {project_version}
+
+{project_description}
+
+{my-attribute}
